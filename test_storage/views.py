@@ -128,14 +128,14 @@ def get_mp3(url):
 
     youtube_video.streams.filter(only_audio=True).first().download()
 
-    mp3_file_path = os.path.join(DEFAULT_FILE_STORAGE, mp3_file)
-    mp4_file_path = os.path.join(DEFAULT_FILE_STORAGE, mp4_file)
+    mp3_file_path = os.path.join(BASE_DIR, mp3_file)
+    mp4_file_path = os.path.join(BASE_DIR, mp4_file)
     
     clip = AudioFileClip(mp4_file_path)
     clip.write_audiofile(mp3_file_path)
     clip.close()
 
-    os.remove(mp4_file_path)
+    # os.remove(mp4_file_path)
     
     audio = Audio()
     audio.mp3 = File(open(mp3_file, mode='rb'))
